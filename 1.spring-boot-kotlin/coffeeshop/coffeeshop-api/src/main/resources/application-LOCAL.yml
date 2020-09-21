@@ -1,0 +1,20 @@
+application:
+  phase: LOCAL
+
+server:
+  error:
+    includeStacktrace: ALWAYS
+
+internal-api:
+  headerSecretKey: kkkkk
+
+httpclient:
+  default:
+    socketTimeoutMillis: 5000
+    connectTimeoutMillis: 5000
+    pooledIdleConnectionTtlMillis: 300000
+    pooledMaxTotal: 500
+    useKeepalive: true
+    retryLimit: 1
+
+debug: true

@@ -1,0 +1,14 @@
+application:
+  phase: RELEASE
+
+internal-api:
+  headerSecretKey: adlkjalghdalkf
+
+httpclient:
+  default:
+    socketTimeoutMillis: 5000
+    connectTimeoutMillis: 5000
+    pooledIdleConnectionTtlMillis: 300000
+    pooledMaxTotal: 500
+    useKeepalive: true
+    retryLimit: 1

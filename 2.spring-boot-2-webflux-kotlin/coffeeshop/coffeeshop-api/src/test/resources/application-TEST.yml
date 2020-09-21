@@ -1,0 +1,4 @@
+application:
+  phase: TEST
+
+server.port: 8080
