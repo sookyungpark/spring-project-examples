@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<appender name="file-default" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/username/logs/${name}/\${server.port}/${name}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/home/username/logs/${name}/\${server.port}/${name}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%date %t %X{req.remoteAddr} %-5level %logger{20}[%file:%method:%line] - %msg %ex{30}%nopex%n</Pattern>
+		</encoder>
+	</appender>
+	<appender name="file" class="ch.qos.logback.classic.AsyncAppender">
+		<param name="queueSize" value="1024" />
+		<param name="includeCallerData" value="true" />
+		<appender-ref ref="file-default" />
+	</appender>
+</included>
