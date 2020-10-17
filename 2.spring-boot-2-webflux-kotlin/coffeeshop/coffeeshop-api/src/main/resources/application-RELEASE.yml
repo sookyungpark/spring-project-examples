@@ -1,0 +1,15 @@
+application:
+  phase: RELEASE
+
+auth:
+  userCache:
+    maximumSize: 1000
+    expireAfterWriteMinutes: 10
+  httpClient:
+    baseUrl: http://coffeeshop-auth-service.domain.com
+    connectTimeoutMillis: 5000
+    readTimeoutSec: 5
+    writeTimeoutSec: 5
+    soKeepAlive: true
+    tcpNoDelay: true
+    reuseAddr: true
