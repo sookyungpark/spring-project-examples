@@ -1,30 +1,24 @@
 package com.customproject.coffeeshop.api.handler
 
-import com.customproject.coffeeshop.api.client.ExternalAuthClient
-import com.customproject.coffeeshop.api.filter.UserAuthCheckFilter
 import com.customproject.coffeeshop.api.support.CoffeeshopConstants
-import com.customproject.coffeeshop.api.support.FilterOrder
 import com.customproject.coffeeshop.domain.request.CreateOrderMenuRequest
 import com.customproject.coffeeshop.domain.request.CreateOrderRequest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.given
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
-import org.springframework.restdocs.request.RequestDocumentation
 import org.springframework.restdocs.snippet.Attributes
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.server.ServerResponse
-import reactor.core.publisher.Mono
 
 
-class OrderHandlerTest: HandlerBaseTest() {
+class OrderHandlerTest(): BaseHandlerTest() {
 
     @Autowired
     private val orderHandler: OrderHandler? = null

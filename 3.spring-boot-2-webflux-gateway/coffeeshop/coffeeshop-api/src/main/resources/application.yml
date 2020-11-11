@@ -1,0 +1,30 @@
+#### DEFAULT PROFILE IS LOCAL ###
+# Spring boot loads application.yml and application-<profile>.yml
+
+spring:
+  application:
+    name: COFFEESHOPWEB
+  profiles:
+    active: LOCAL
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    favicon:
+      enabled: false
+
+management:
+  server:
+    add-application-context-header: false
+    security:
+      enabled: false
+
+server:
+  port: 5000
+  connection-timeout: 120s

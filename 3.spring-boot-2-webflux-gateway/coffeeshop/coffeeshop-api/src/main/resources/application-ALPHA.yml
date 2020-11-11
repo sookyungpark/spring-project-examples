@@ -1,0 +1,43 @@
+application:
+  phase: ALPHA
+
+internal-api:
+  headerSecretKey: kkkkk
+
+ip-blacklist:
+  cache:
+    maximumSize: 1000
+    expireAfterWriteMinutes: 10
+
+auth:
+  httpClient:
+    baseUrl: http://coffeeshop-auth-service.domain.com
+    connectTimeoutMillis: 5000
+    readTimeoutSec: 5
+    writeTimeoutSec: 5
+    soKeepAlive: true
+    tcpNoDelay: true
+    reuseAddr: true
+
+coffeeshop-api:
+  httpClient:
+    baseUrl: http://coffeeshop-api.domain.com
+    connectTimeoutMillis: 5000
+    readTimeoutSec: 5
+    writeTimeoutSec: 5
+    soKeepAlive: true
+    tcpNoDelay: true
+    reuseAddr: true
+
+profile:
+  cache:
+    maximumSize: 10000
+    expireAfterWriteMinutes: 10
+  httpClient:
+    baseUrl: http://coffeeshop-profile-service.domain.com
+    connectTimeoutMillis: 5000
+    readTimeoutSec: 5
+    writeTimeoutSec: 5
+    soKeepAlive: true
+    tcpNoDelay: true
+    reuseAddr: true

@@ -1,0 +1,9 @@
+application:
+  phase: TEST
+
+server.port: 8080
+
+spring:
+  cloud:
+    gateway:
+      enabled: true

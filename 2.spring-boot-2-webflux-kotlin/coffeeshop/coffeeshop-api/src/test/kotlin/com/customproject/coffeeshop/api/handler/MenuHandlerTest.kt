@@ -8,7 +8,6 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.given
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.restdocs.payload.PayloadDocumentation
@@ -20,7 +19,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 
-class MenuHandlerTest: HandlerBaseTest() {
+class MenuHandlerTest: BaseHandlerTest() {
 
     @Autowired
     private val menuHandler: MenuHandler? = null

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class HandlerTestConfiguration {
+
     @MockBean
     val warmupHandler: WarmupHandler? = null
 

@@ -27,7 +27,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @AutoConfigureRestDocs
 @ActiveProfiles("TEST")
 @ContextConfiguration(classes = [RouterConfiguration::class, ApplicationProperties::class])
-open class HandlerBaseTest {
+open class BaseHandlerTest {
     companion object {
         val objectMapper: ObjectMapper = ObjectMapper().apply {
             registerModules(AfterburnerModule(), JavaTimeModule())

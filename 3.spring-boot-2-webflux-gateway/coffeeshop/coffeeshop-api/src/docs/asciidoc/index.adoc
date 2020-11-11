@@ -1,0 +1,233 @@
+= Coffeeshop API Documentation
+github.com
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[introduction]]
+== Introduction
+
+Coffeeshop API Documentation for developer
+
+[[common]]
+= Common
+
+== Domain
+
+|===
+| Environment | domain
+
+| Alpha
+| `alpha domain`
+
+| Staging
+| `staging domain`
+
+| Sandbox
+| `TBD`
+
+| Release
+| `TBD`
+|===
+
+== Supported Languages
+
+|===
+| Name | Description
+
+| en
+| `English (default)`
+|===
+
+= Menu
+
+== List Menus
+
+=== Request
+
+CURL:
+
+include::{snippets}/list-menus/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/list-menus/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/list-menus/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/list-menus/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/list-menus/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/list-menus/http-response.adoc[]
+
+== Get Menu
+
+=== Request
+
+CURL:
+
+include::{snippets}/list-menu/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/list-menu/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/list-menu/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/list-menu/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/list-menu/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/list-menu/http-response.adoc[]
+
+
+= User
+
+== Get User Profile
+
+=== Request
+
+CURL:
+
+include::{snippets}/get-user-profile/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/get-user-profile/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/get-user-profile/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/get-user-profile/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/get-user-profile/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/get-user-profile/http-response.adoc[]
+
+
+= Order
+
+== [Internal] List Orders
+
+=== Request
+
+CURL:
+
+include::{snippets}/list-internal-orders/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/list-internal-orders/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/list-internal-orders/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/list-internal-orders/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/list-internal-orders/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/list-internal-orders/http-response.adoc[]
+
+
+== [Internal] Get Order
+
+=== Request
+
+CURL:
+
+include::{snippets}/internal-get-order/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/internal-get-order/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/internal-get-order/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/internal-get-order/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/internal-get-order/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/internal-get-order/http-response.adoc[]
+
+
+== Create Order
+
+=== Request
+
+CURL:
+
+include::{snippets}/create-orders/curl-request.adoc[]
+
+Request Headers:
+
+include::{snippets}/create-orders/request-headers.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/create-orders/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/create-orders/response-fields.adoc[]
+
+Response Body:
+
+include::{snippets}/create-orders/response-body.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/create-orders/http-response.adoc[]
