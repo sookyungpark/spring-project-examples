@@ -1,0 +1,9 @@
+application:
+  phase: STAGING
+
+order:
+  consumer:
+    bootstrapServers: localhost:9000
+    topic: order-v1
+    groupId: coffeeshop-consumer
+    autoOffsetReset: latest

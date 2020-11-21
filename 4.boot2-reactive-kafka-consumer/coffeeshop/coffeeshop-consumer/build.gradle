@@ -1,0 +1,68 @@
+plugins {
+    id "com.moowork.node" version "0.13"
+    id "org.asciidoctor.convert" version "1.5.3"
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+version '1.0.0'
+
+dependencies {
+    compile project(':coffeeshop-domain')
+
+    // kotlin
+    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion)
+    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlinVersion)
+
+    // etc
+    compile(group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.+')
+
+    compile('com.auth0:java-jwt:3.2.0')
+    compile('io.dropwizard.metrics:metrics-core:4.1.0')
+
+    compile group: 'io.netty', name: 'netty-resolver-dns', version: '4.1.43.Final'
+    compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.8.0'
+    compile group: 'com.google.guava', name: 'guava', version: 'r05'
+
+    compile group: 'org.jolokia', name: 'jolokia-core', version: '1.6.0'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'io.rest-assured:rest-assured:3.0.2'
+    testCompile 'org.springframework.restdocs:spring-restdocs-restassured'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE'
+    testCompile 'com.squareup.okhttp3:okhttp:4.0.1'
+    testCompile 'com.squareup.okhttp3:mockwebserver:4.0.1'
+}
+
+jar {
+    archiveName "service-${project.name}.jar"
+}
+
+eclipseJdt.onlyIf { false }
+cleanEclipseJdt.onlyIf { false }
+
+bootRun {
+    if (System.properties["spring.profiles.active"] == null) {
+        systemProperty "spring.profiles.active", "LOCAL"
+    } else {
+        systemProperty "spring.profiles.active", System.properties["spring.profiles.active"]
+    }
+
+    systemProperty "server.port", System.properties["server.port"]
+}

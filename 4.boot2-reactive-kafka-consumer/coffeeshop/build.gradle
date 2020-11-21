@@ -1,0 +1,134 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.4.RELEASE'
+        artifactRepoBase = "http://oss.jfrog.org/artifactory"
+        baseVersion = "1.0.1"
+        baseLibVersion = "3.0.0-SNAPSHOT"
+        baseAuthVersion = "3.0.0-SNAPSHOT"
+        configurationVersion = "3.0.0-SNAPSHOT"
+        jacksonVersion = "2.9.8"
+        kotlinVersion = '1.3.72'
+        micrometerVersion = '1.1.3'
+        platformLogVersion = "1.2.0"
+        serviceProjects = [ "coffeeshop-consumer" ]
+    }
+
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.maven.apache.org/maven2" }
+
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'de.undercouch:gradle-download-task:3.4.3'
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+allprojects {
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'groovy'
+    apply plugin: 'java-library'
+
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    group = 'com.customproject.coffeeshop'
+
+    configurations.compile {
+        exclude module: 'spring-boot-starter-web'
+        exclude module: 'spring-boot-starter-jetty'
+        exclude module: 'jetty-server'
+        exclude group: 'javax.servlet'
+    }
+
+    configurations.all {
+        exclude module: 'spring-boot-starter-web'
+        exclude module: 'spring-boot-starter-jetty'
+
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+subprojects {
+    processResources {
+        String commitVersion = System.getProperty("commitVersion")
+        if(commitVersion == null){
+            commitVersion = ""
+        }
+        filesMatching(["**/*.yml", "**/*.xml"]) {
+            expand version: project.version,
+                    group: project.group,
+                    name: project.name,
+                    serviceCode: project.name.toUpperCase(),
+                    appBuiltTime: new Date().getTime(),
+                    commitVersion: commitVersion
+        }
+    }
+
+    dependencies {
+        compile group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${jacksonVersion}"
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${jacksonVersion}"
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+        compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-afterburner', version: "${jacksonVersion}"
+
+        // spring
+        compile(group: "org.springframework.boot", name: "spring-boot-starter-webflux", version: springBootVersion)
+        compile(group: "org.springframework.boot", name: "spring-boot-configuration-processor", version: springBootVersion)
+        compile(group: "org.springframework.boot", name: "spring-boot-starter-reactor-netty")
+
+        compile(group: "io.netty", name: "netty-buffer")
+
+        compile(group: "io.projectreactor", name: "reactor-core", version: '3.3.2.RELEASE')
+        compile(group: 'io.projectreactor.addons', name: 'reactor-extra', version: '3.3.2.RELEASE')
+
+        // kafka
+        compile(group: "io.projectreactor.kafka", name: "reactor-kafka", version: "1.2.2.RELEASE")
+
+        compile(group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.+')
+        compile(group: 'io.github.microutils', name: 'kotlin-logging', version: '1.6.10')
+        compile group: 'io.micrometer', name: 'micrometer-core', version: "${micrometerVersion}"
+        compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.1.3'
+
+        // test
+        testCompile(group: 'com.nhaarman', name: 'mockito-kotlin', version: '1.5.0')
+    }
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+    }
+
+    task copyJars(type: Copy) {
+        from "${buildDir}/libs"
+        into "${buildDir}/deploy/module/${project.name}"
+    }
+
+    task printName {
+        doLast {
+            println "${project.name}"
+        }
+    }
+}
+
+ // for service projects
+configure(subprojects.findAll { project.ext.serviceProjects.contains(it.name) }) {
+    apply plugin: 'org.springframework.boot'
+
+    jar {
+        archiveName "service-${project.name}.jar"
+    }
+}
