@@ -13,12 +13,12 @@ import org.springframework.web.reactive.function.server.RouterFunctions.resource
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
-public class RouterConfiguration(private val warmupHandler: WarmupHandler,
-                                 private val managementHandler: ManagementHandler,
-                                 private val orderHandler: OrderHandler,
-                                 private val userHandler: UserHandler,
-                                 private val menuHandler: MenuHandler,
-                                 private val internalOrderHandler: InternalOrderHandler) {
+public class RouterConfig(private val warmupHandler: WarmupHandler,
+                          private val managementHandler: ManagementHandler,
+                          private val orderHandler: OrderHandler,
+                          private val userHandler: UserHandler,
+                          private val menuHandler: MenuHandler,
+                          private val internalOrderHandler: InternalOrderHandler) {
 
     @Bean
     @Order(100)
@@ -46,6 +46,7 @@ public class RouterConfiguration(private val warmupHandler: WarmupHandler,
             ("/menus").nest {
                 GET("/", menuHandler::list)
                 GET("/{id}", menuHandler::get)
+                POST("/search", menuHandler::search)
             }
         }
     }

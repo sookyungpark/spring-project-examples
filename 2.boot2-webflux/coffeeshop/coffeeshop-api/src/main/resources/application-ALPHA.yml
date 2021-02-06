@@ -1,6 +1,18 @@
 application:
   phase: ALPHA
 
+spring:
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: localhost:9200
+          connection-timeout: 30000
+          socket-timeout: 30000
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
 auth:
   httpClient:
     baseUrl: http://coffeeshop-auth-service.domain.com

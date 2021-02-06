@@ -5,6 +5,7 @@ import com.customproject.coffeeshop.api.repository.UserRepository
 import com.customproject.coffeeshop.domain.response.UserListResponse
 import com.customproject.coffeeshop.domain.response.UserProfileGetResponse
 import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono
 
 @Service
 class UserService(private val externalProfileClient: ExternalProfileClient,
-                  private val userRepository: UserRepository) {
+                  @Qualifier("MockUserRepository") private val userRepository: UserRepository) {
 
     companion object {
         private val log = KotlinLogging.logger {}

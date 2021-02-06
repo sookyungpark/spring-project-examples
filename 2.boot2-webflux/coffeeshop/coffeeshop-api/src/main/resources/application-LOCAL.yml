@@ -5,6 +5,18 @@ server:
   error:
     includeStacktrace: ALWAYS
 
+spring:
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: localhost:9200
+          connection-timeout: 30000
+          socket-timeout: 30000
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
 auth:
   userCache:
     maximumSize: 1000
@@ -17,5 +29,10 @@ auth:
     soKeepAlive: true
     tcpNoDelay: true
     reuseAddr: true
+
+menu:
+  search:
+    vectorScoring: true
+
 
 debug: true

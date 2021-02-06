@@ -3,9 +3,6 @@ plugins {
     id "org.asciidoctor.convert" version "1.5.3"
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'kotlin-spring'
-
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
@@ -30,13 +27,20 @@ dependencies {
     compile(group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlinVersion)
 
     // etc
-    compile(group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.+')
+    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+'
 
-    // etc
-    compile(group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.+')
+    // mysql
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5'
+    runtime group: 'mysql', name: 'mysql-connector-java'
 
-    compile('com.auth0:java-jwt:3.2.0')
-    compile('io.dropwizard.metrics:metrics-core:4.1.0')
+    // elasticsearch
+    compile 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    compile group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '4.1.3'
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '7.10.2'
+
+    compile 'com.auth0:java-jwt:3.2.0'
+    compile 'io.dropwizard.metrics:metrics-core:4.1.0'
 
     compile group: 'io.netty', name: 'netty-resolver-dns', version: '4.1.43.Final'
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.8.0'
@@ -55,6 +59,10 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE'
     testCompile 'com.squareup.okhttp3:okhttp:4.0.1'
     testCompile 'com.squareup.okhttp3:mockwebserver:4.0.1'
+
+    // mock server
+    implementation("org.mock-server:mockserver-netty:5.11.1")
+    implementation("org.mock-server:mockserver-client-java:5.11.1")
 }
 
 test {

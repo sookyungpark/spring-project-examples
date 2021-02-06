@@ -1,5 +1,6 @@
 package com.customproject.coffeeshop.api.handler
 
+import com.customproject.coffeeshop.api.domain.MenuSearchQuery
 import com.customproject.coffeeshop.api.exception.UnexpectedException
 import com.customproject.coffeeshop.api.service.MenuService
 import com.customproject.coffeeshop.api.support.RequestLoggingSupport
@@ -9,14 +10,14 @@ import org.springframework.web.reactive.function.server.ServerRequest
 
 
 @Component
-public class MenuHandler(private val menuService: MenuService,
-                         requestLoggingSupport: RequestLoggingSupport) : BaseHandler(requestLoggingSupport) {
+class MenuHandler(private val menuService: MenuService,
+                  requestLoggingSupport: RequestLoggingSupport) : BaseHandler(requestLoggingSupport) {
     companion object {
         val LIST_COUNT_RANGE: Range<Long> = Range.between(1L, 20000L)
     }
 
     @Throws(UnexpectedException::class)
-    public fun list(r: ServerRequest) = fluxResponse(r) { request ->
+    fun list(r: ServerRequest) = fluxResponse(r) { request ->
 
         val countLimit = request.queryParam("limit")
                 .map { it.toLong() }
@@ -27,10 +28,13 @@ public class MenuHandler(private val menuService: MenuService,
     }
 
     @Throws(UnexpectedException::class)
-    public fun get(r: ServerRequest) = monoResponse(r) { request ->
+    fun get(r: ServerRequest) = monoResponse(r) { request ->
+        menuService.get(id = request.pathVariable("id"))
+    }
 
-        val orderId = request.pathVariable("id")
-
-        menuService.get(id = orderId)
+    @Throws(UnexpectedException::class)
+    fun search(r: ServerRequest) = fluxResponse(r) { request ->
+        request.bodyToMono(MenuSearchQuery::class.java)
+                .flatMapMany { menuService.search(it) }
     }
 }

@@ -1,0 +1,1 @@
+if (doc['context_vec'] == null) { return _score; } return cosineSimilarity(params.query_vec, doc['context_vec']) + 1.0;

@@ -2,6 +2,7 @@ package com.customproject.coffeeshop.api.service
 
 import com.customproject.coffeeshop.api.ApiTestSupport
 import com.customproject.coffeeshop.api.repository.MenuRepository
+import com.customproject.coffeeshop.api.repository.MenuSearchRepository
 import com.customproject.coffeeshop.domain.response.MenuListResponse
 import org.junit.Assert
 import org.junit.Test
@@ -14,7 +15,8 @@ import reactor.core.publisher.Flux
 class MenuServiceTest {
 
     private val menuRepository: MenuRepository = Mockito.mock(MenuRepository::class.java)
-    private val menuService: MenuService = MenuService(menuRepository)
+    private val menuSearchRepository: MenuSearchRepository = Mockito.mock(MenuSearchRepository::class.java)
+    private val menuService: MenuService = MenuService(menuRepository, menuSearchRepository)
 
     @Test
     fun list() {

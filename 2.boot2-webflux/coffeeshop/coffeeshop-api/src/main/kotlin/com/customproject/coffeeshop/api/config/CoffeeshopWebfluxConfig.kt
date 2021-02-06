@@ -38,9 +38,9 @@ import reactor.netty.tcp.TcpClient
 
 @Configuration
 @EnableWebFlux
-public class CoffeeshopWebfluxConfiguration(private val appProperties: ApplicationProperties,
-                                            private val authProperties: AuthProperties,
-                                            private val profileProperties: ProfileProperties) : WebFluxConfigurer {
+public class CoffeeshopWebfluxConfig(private val appProperties: ApplicationProperties,
+                                     private val authProperties: AuthProperties,
+                                     private val profileProperties: ProfileProperties) : WebFluxConfigurer {
 
     @Bean
     @Primary

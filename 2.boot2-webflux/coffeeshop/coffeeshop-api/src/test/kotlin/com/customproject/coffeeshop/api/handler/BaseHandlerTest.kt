@@ -1,6 +1,6 @@
 package com.customproject.coffeeshop.api.handler
 
-import com.customproject.coffeeshop.api.config.RouterConfiguration
+import com.customproject.coffeeshop.api.config.RouterConfig
 import com.customproject.coffeeshop.api.config.property.ApplicationProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -26,7 +26,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @WebFluxTest
 @AutoConfigureRestDocs
 @ActiveProfiles("TEST")
-@ContextConfiguration(classes = [RouterConfiguration::class, ApplicationProperties::class])
+@ContextConfiguration(classes = [RouterConfig::class, ApplicationProperties::class])
 open class BaseHandlerTest {
     companion object {
         val objectMapper: ObjectMapper = ObjectMapper().apply {

@@ -33,3 +33,6 @@ class HandlerNotFoundException(msg: String, cause: Throwable?) : CoffeeshopExcep
 class UnexpectedException(msg: String, cause: Throwable?) : CoffeeshopException(HttpStatus.INTERNAL_SERVER_ERROR, "0001", msg, cause) {
     constructor(msg: String) : this(msg, null)
 }
+class UnexpectedMenuException(msg: String, cause: Throwable?) : CoffeeshopException(HttpStatus.INTERNAL_SERVER_ERROR, "0002", msg, cause) {
+    constructor(msg: String) : this(msg, null)
+}
