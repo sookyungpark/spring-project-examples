@@ -42,6 +42,7 @@ class OrderService(private val orderRepository: OrderRepository) {
 
                     val newOrder = Order(
                         id = OrderSupport.generateId(),
+                        userId = OrderSupport.generateId(),
                         menus = menus)
                     orderRepository.upsert(newOrder)
                 }
@@ -50,7 +51,9 @@ class OrderService(private val orderRepository: OrderRepository) {
     fun update(userId: String, requestBody: Mono<UpdateOrderRequest>): Mono<Void> {
         return requestBody
                 .flatMap {
-                    orderRepository.get(it.id).defaultIfEmpty(Order(id = OrderSupport.generateId()))
+                    orderRepository.get(it.id).defaultIfEmpty(Order(
+                            id = OrderSupport.generateId(),
+                            userId = OrderSupport.generateId()))
                         .map { order ->
                             val menus = it.menus
                                     .map { OrderMenu(it.menuId, it.count) }

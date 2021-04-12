@@ -1,9 +1,8 @@
 package com.customproject.coffeeshop.api.config
 
-import com.customproject.coffeeshop.api.filter.InternalAuthCheckFilter
-import com.customproject.coffeeshop.api.filter.UserAuthCheckFilter
 import com.customproject.coffeeshop.api.handler.*
 import com.customproject.coffeeshop.api.handler.internal.InternalOrderHandler
+import com.customproject.coffeeshop.api.handler.internal.InternalUserHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
@@ -18,6 +17,7 @@ public class RouterConfig(private val warmupHandler: WarmupHandler,
                           private val orderHandler: OrderHandler,
                           private val userHandler: UserHandler,
                           private val menuHandler: MenuHandler,
+                          private val internalUserHandler: InternalUserHandler,
                           private val internalOrderHandler: InternalOrderHandler) {
 
     @Bean
@@ -75,7 +75,7 @@ public class RouterConfig(private val warmupHandler: WarmupHandler,
                 GET("/{id}", internalOrderHandler::get)
             }
             ("/users").nest {
-                GET("/", userHandler::list)
+                GET("/", internalUserHandler::list)
             }
 
         }

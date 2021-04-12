@@ -11,21 +11,6 @@ import org.springframework.web.reactive.function.server.ServerRequest
 @Component
 public class UserHandler(private val userService: UserService,
                          requestLoggingSupport: RequestLoggingSupport) : BaseHandler(requestLoggingSupport) {
-    companion object {
-        val LIST_COUNT_RANGE: Range<Long> = Range.between(1L, 20000L)
-    }
-
-    @Throws(UnexpectedException::class)
-    public fun list(r: ServerRequest) = fluxResponse(r) { request ->
-
-        val countLimit = request.queryParam("limit")
-                .map { it.toLong() }
-                .filter { LIST_COUNT_RANGE.contains(it) }
-                .orElse(LIST_COUNT_RANGE.maximum)
-
-        userService.list(countLimit = countLimit)
-    }
-
     @Throws(UnexpectedException::class)
     public fun getProfile(r: ServerRequest) = monoResponse(r) { request ->
         val userId = request.pathVariable("id")
